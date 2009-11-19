@@ -1,0 +1,147 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>MvcTurbine.Windsor</name>
+    </assembly>
+    <members>
+        <member name="T:MvcTurbine.Windsor.ConfigFileFinder">
+            <summary>
+            Static utilty class
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Windsor.ConfigFileFinder.GetConfigFilePath(System.String,System.String)">
+            <summary>
+            Gets the path for the configuration file under the <see cref="P:System.AppDomainSetup.ApplicationBase"/> path.
+            </summary>
+            <param name="folder">Folder to search.</param>
+            <param name="file">File name to search.</param>
+            <returns>The full path of [ApplicationBase]\__config\[folder]\[filename].</returns>
+        </member>
+        <member name="T:MvcTurbine.Windsor.WindsorFileProvider">
+            <summary>
+            Default implementation of the <see cref="T:MvcTurbine.Windsor.IComponentFileProvider"/> that locates
+            the windsor.config file under the [webroot]\__config\servicelocator folder.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.Windsor.IComponentFileProvider">
+            <summary>
+            Defines an interface for providing the filename and path for a configuration file.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Windsor.IComponentFileProvider.GetComponentFilePath">
+            <summary>
+            Gets the file path of the file.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:MvcTurbine.Windsor.IComponentFileProvider.FileName">
+            <summary>
+            Gets the filename of the file to use.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Windsor.WindsorFileProvider.#ctor(System.String)">
+            <summary>
+            Prive contructor for the instance.
+            </summary>
+            <param name="file"></param>
+        </member>
+        <member name="M:MvcTurbine.Windsor.WindsorFileProvider.GetComponentFilePath">
+            <summary>
+            See <see cref="M:MvcTurbine.Windsor.IComponentFileProvider.GetComponentFilePath"/>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.Windsor.WindsorFileProvider.GetDefaultComponentFileProvider">
+            <summary>
+            Gets an instance of <see cref="T:MvcTurbine.Windsor.WindsorFileProvider"/>.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:MvcTurbine.Windsor.WindsorFileProvider.FileName">
+            <summary>
+            See <see cref="P:MvcTurbine.Windsor.IComponentFileProvider.FileName"/>.
+            </summary>
+        </member>
+        <member name="T:MvcTurbine.Windsor.WindsorServiceLocator">
+            <summary>
+            Implemenation of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/> using <see cref="T:Castle.Windsor.IWindsorContainer"/> as the default container.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.#ctor(MvcTurbine.Windsor.IComponentFileProvider)">
+            <summary>
+            Create an instance of the type an use the specified <see cref="T:MvcTurbine.Windsor.IComponentFileProvider"/>.
+            </summary>
+            <param name="fileProvider"><see cref="T:MvcTurbine.Windsor.IComponentFileProvider"/> to use.</param>
+        </member>
+        <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.InitializeWith(Castle.Windsor.IWindsorContainer)">
+            <summary>
+            Initializes the current instance of with the specified <see cref="T:Castle.Windsor.IWindsorContainer"/>.
+            </summary>
+            <param name="container"></param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.WindsorServiceLocator.Resolve``1" -->
+        <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.WindsorServiceLocator.Resolve``1(System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.WindsorServiceLocator.Resolve``1(System.Type)" -->
+        <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.WindsorServiceLocator.ResolveServices``1" -->
+        <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.WindsorServiceLocator.Unregister``1" -->
+        <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.WindsorServiceLocator.Unregister``1(System.String)" -->
+        <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.WindsorServiceLocator.Register``1(System.Type)" -->
+        <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.WindsorServiceLocator.Register``2" -->
+        <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.WindsorServiceLocator.Register``2(System.String)" -->
+        <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.Register(System.String,System.Type,Castle.Core.LifestyleType)">
+            <summary>
+            Registers the <paramref name="type"/> with the specified <paramref name="key"/> and given
+            <paramref name="lifestyleType"/> lifestyle.
+            </summary>
+            <param name="key"></param>
+            <param name="type"></param>
+            <param name="lifestyleType"></param>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:MvcTurbine.Windsor.WindsorServiceLocator.RegisterSingleton``2" -->
+        <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.Register(System.String,System.Type)">
+            <summary>
+            See <see cref="M:MvcTurbine.ComponentModel.IServiceLocator.Register(System.String,System.Type)"/>.
+            </summary>
+            <param name="key"></param>
+            <param name="type"></param>
+        </member>
+        <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.Release(System.Object)">
+            <summary>
+            See <see cref="M:MvcTurbine.ComponentModel.IServiceLocator.Release(System.Object)"/>.
+            </summary>
+            <param name="instance"></param>
+        </member>
+        <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.GetContainer">
+            <summary>
+            Gets the current <see cref="T:Castle.Windsor.IWindsorContainer"/> for the locator.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.Reset">
+            <summary>
+            See <see cref="M:MvcTurbine.ComponentModel.IServiceLocator.Reset"/>.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.Dispose">
+            <summary>
+            Disposes (resets) the current service locator.
+            </summary>
+        </member>
+        <member name="M:MvcTurbine.Windsor.WindsorServiceLocator.EnsureInitialized">
+            <summary>
+            Initializes all components if not previously setup.
+            </summary>
+        </member>
+        <member name="P:MvcTurbine.Windsor.WindsorServiceLocator.Instance">
+            <summary>
+            Gets the current instance of <see cref="T:MvcTurbine.ComponentModel.IServiceLocator"/>. By default it is set to (this) when
+            <see cref="T:MvcTurbine.Windsor.WindsorServiceLocator"/> is created.
+            </summary>
+        </member>
+    </members>
+</doc>
