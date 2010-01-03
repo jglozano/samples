@@ -32,19 +32,19 @@ namespace InjectableWebForms {
 
     public class Global : HttpApplication {
         protected void Application_Start(object sender, EventArgs e) {
-            ContainerGateway.Initialize();
+            IoC.Initialize();
 
             RegisterComponents();
         }
 
         protected void Application_End(object sender, EventArgs e) {
-            if (ContainerGateway.WindsorContainer != null) {
-                ContainerGateway.WindsorContainer.Dispose();
+            if (IoC.WindsorContainer != null) {
+                IoC.WindsorContainer.Dispose();
             }
         }
 
         private static void RegisterComponents() {
-            IWindsorContainer container = ContainerGateway.WindsorContainer;
+            IWindsorContainer container = IoC.WindsorContainer;
 
             container.Register(Component.For<IPersonRepository>()
                                    .ImplementedBy<StaticPersonRepository>()

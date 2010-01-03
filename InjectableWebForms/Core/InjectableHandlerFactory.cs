@@ -34,11 +34,11 @@ namespace InjectableWebForms.Core {
         public virtual IHttpHandler GetHandler(HttpContext context, string requestType, string virtualPath, string path) {
             var page = BuildManager.CreateInstanceFromVirtualPath(virtualPath, typeof (Page)) as IHttpHandler;
 
-            return page == null ? null : ResolveInjectableProperties(page, ContainerGateway.WindsorContainer);
+            return page == null ? null : ResolveInjectableProperties(page, IoC.WindsorContainer);
         }
 
         public void ReleaseHandler(IHttpHandler handler) {
-            ReleaseInjectedProperties(handler, ContainerGateway.WindsorContainer);
+            ReleaseInjectedProperties(handler, IoC.WindsorContainer);
         }
 
         #endregion
