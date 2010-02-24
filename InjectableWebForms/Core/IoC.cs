@@ -20,13 +20,44 @@
 #endregion
 
 namespace InjectableWebForms.Core {
+    using System;
+    using System.Linq;
+    using Castle.Core;
     using Castle.Windsor;
 
     public static class IoC {
-        public static IWindsorContainer WindsorContainer { get; private set; }
+        public static IWindsorContainer Container { get; private set; }
 
         public static void Initialize() {
-            WindsorContainer = new WindsorContainer();
+            Container = new WindsorContainer();
+        }
+
+        public static void CleanUp() {
+            if(Container == null) return;
+            Container.Dispose();
+        }
+
+        public static void BuildUp<T>(T instance) where T : class {
+            if (instance == null) return;
+
+            // Get the type
+            Type instanceType = instance.GetType();
+            
+            // For all public properties, see if you can 'inject' the dependency
+            instanceType.GetProperties()
+                .Where(property => property.CanWrite && Container.Kernel.HasComponent(property.PropertyType))
+                .ForEach(property => property.SetValue(instance, Container.Resolve(property.PropertyType), null));
+        }
+
+        public static void TearDown<T>(T instance) where T : class {
+            if (instance == null) return;
+
+            Type instanceType = instance.GetType();
+
+            // For all public properties see if you can 'dispose' of any inject properties
+            instanceType.GetProperties()
+                .Where(property => Container.Kernel.HasComponent(property.PropertyType))
+                .ForEach(property => Container.Release(property.GetValue(instance, null)));
         }
     }
 }

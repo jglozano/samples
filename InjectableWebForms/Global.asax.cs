@@ -38,13 +38,12 @@ namespace InjectableWebForms {
         }
 
         protected void Application_End(object sender, EventArgs e) {
-            if (IoC.WindsorContainer != null) {
-                IoC.WindsorContainer.Dispose();
-            }
+           IoC.CleanUp();
         }
 
         private static void RegisterComponents() {
-            IWindsorContainer container = IoC.WindsorContainer;
+            // Register the components into the container
+            IWindsorContainer container = IoC.Container;
 
             container.Register(Component.For<IPersonRepository>()
                                    .ImplementedBy<StaticPersonRepository>()

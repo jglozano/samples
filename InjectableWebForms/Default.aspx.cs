@@ -58,6 +58,7 @@ namespace InjectableWebForms {
         #endregion
 
         protected void Page_Init(object sender, EventArgs e) {
+            // Manually wire up the presenters for the page to use
             ListPresenter.Associate(this);
             CreatorPresenter.Associate(this);
         }
