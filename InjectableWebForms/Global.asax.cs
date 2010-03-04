@@ -22,6 +22,7 @@
 namespace InjectableWebForms {
     using System;
     using System.Web;
+    using System.Web.UI;
     using Castle.MicroKernel.Registration;
     using Castle.Windsor;
     using Core;
@@ -37,8 +38,34 @@ namespace InjectableWebForms {
             RegisterComponents();
         }
 
+        public override void Init() {
+            // Inject properties into the handler before execution
+            PreRequestHandlerExecute += (sender, e) =>
+            {
+                var app = sender as HttpApplication;
+                if (app == null) return;
+
+                var handler = app.Context.CurrentHandler;
+            
+                if (handler == null) return;
+                IoC.BuildUp(handler);
+            };
+
+            // Dispose properties after execution
+            PostRequestHandlerExecute += (sender, e) =>
+            {
+                var app = sender as HttpApplication;
+                if (app == null) return;
+
+                var handler = app.Context.CurrentHandler;
+
+                if (handler == null) return;
+                IoC.TearDown(handler);
+            };
+        }
+
         protected void Application_End(object sender, EventArgs e) {
-           IoC.CleanUp();
+            IoC.CleanUp();
         }
 
         private static void RegisterComponents() {
@@ -48,11 +75,11 @@ namespace InjectableWebForms {
             container.Register(Component.For<IPersonRepository>()
                                    .ImplementedBy<StaticPersonRepository>()
                                    .LifeStyle.Transient,
-                                   
+
                                Component.For<IPersonListPresenter>()
                                    .ImplementedBy<PersonListPresenter>()
                                    .LifeStyle.Transient,
-                                   
+
                                Component.For<IPersonCreatorPresenter>()
                                    .ImplementedBy<PersonCreatorPresenter>()
                                    .LifeStyle.Transient);

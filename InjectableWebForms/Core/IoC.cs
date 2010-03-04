@@ -45,8 +45,10 @@ namespace InjectableWebForms.Core {
             
             // For all public properties, see if you can 'inject' the dependency
             instanceType.GetProperties()
-                .Where(property => property.CanWrite && Container.Kernel.HasComponent(property.PropertyType))
-                .ForEach(property => property.SetValue(instance, Container.Resolve(property.PropertyType), null));
+                .Where(property => property.CanWrite && 
+                    Container.Kernel.HasComponent(property.PropertyType))
+                .ForEach(property => 
+                    property.SetValue(instance, Container.Resolve(property.PropertyType), null));
         }
 
         public static void TearDown<T>(T instance) where T : class {

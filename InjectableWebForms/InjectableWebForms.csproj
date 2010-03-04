@@ -84,7 +84,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Core\InjectableHandlerFactory.cs" />
     <Compile Include="Persistence\Impl\StaticPersonRepository.cs" />
     <Compile Include="Persistence\IPersonRepository.cs" />
     <Compile Include="Presenters\Impl\PersonCreatorPresenter.cs" />
