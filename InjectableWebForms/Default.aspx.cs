@@ -76,7 +76,7 @@ namespace InjectableWebForms {
             CreatorPresenter.Create();
         }
 
-        private void LoadPersonList() {
+        protected virtual void LoadPersonList() {
             ListPresenter.LoadList();
         }
     }
