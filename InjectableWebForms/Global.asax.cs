@@ -22,7 +22,6 @@
 namespace InjectableWebForms {
     using System;
     using System.Web;
-    using System.Web.UI;
     using Castle.MicroKernel.Registration;
     using Castle.Windsor;
     using Core;
@@ -43,11 +42,15 @@ namespace InjectableWebForms {
             PreRequestHandlerExecute += (sender, e) =>
             {
                 var app = sender as HttpApplication;
-                if (app == null) return;
+                if (app == null) {
+                    return;
+                }
 
-                var handler = app.Context.CurrentHandler;
-            
-                if (handler == null) return;
+                IHttpHandler handler = app.Context.CurrentHandler;
+
+                if (handler == null) {
+                    return;
+                }
                 IoC.BuildUp(handler);
             };
 
@@ -55,11 +58,15 @@ namespace InjectableWebForms {
             PostRequestHandlerExecute += (sender, e) =>
             {
                 var app = sender as HttpApplication;
-                if (app == null) return;
+                if (app == null) {
+                    return;
+                }
 
-                var handler = app.Context.CurrentHandler;
+                IHttpHandler handler = app.Context.CurrentHandler;
 
-                if (handler == null) return;
+                if (handler == null) {
+                    return;
+                }
                 IoC.TearDown(handler);
             };
         }
@@ -79,7 +86,7 @@ namespace InjectableWebForms {
                                Component.For<IPersonListPresenter>()
                                    .ImplementedBy<PersonListPresenter>()
                                    .LifeStyle.Transient,
-
+                               
                                Component.For<IPersonCreatorPresenter>()
                                    .ImplementedBy<PersonCreatorPresenter>()
                                    .LifeStyle.Transient);
