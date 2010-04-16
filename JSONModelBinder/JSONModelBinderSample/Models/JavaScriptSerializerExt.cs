@@ -13,8 +13,8 @@
             // internal static method to do the work for us
             //Deserialize(this, input, null, this.RecursionLimit);
 
-            return deserializerMethod.Invoke(serializer, 
-                new object[] {serializer, input, objType, serializer.RecursionLimit});
+            return deserializerMethod.Invoke(serializer,
+                new object[] { serializer, input, objType, serializer.RecursionLimit });
         }
     }
 }
