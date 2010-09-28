@@ -1,9 +1,9 @@
-namespace inferredPoco {
-	using System;
-	using System.Web.Mvc;
-	using Newtonsoft.Json;
+namespace InferredPoco.Controllers {
+    using System;
+    using System.Web.Mvc;
+    using Newtonsoft.Json;
 
-	public class PocoResult : ActionResult {
+    public class PocoResult : ActionResult {
 		public PocoResult () { }
 
 		public PocoResult (object pocoModel) {

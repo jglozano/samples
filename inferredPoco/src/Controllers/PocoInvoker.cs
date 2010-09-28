@@ -1,8 +1,7 @@
-namespace inferredPoco {
-	using System;
-	using System.Web.Mvc;
-	
-	public class PocoInvoker : ControllerActionInvoker {
+namespace InferredPoco.Controllers {
+    using System.Web.Mvc;
+
+    public class PocoInvoker : ControllerActionInvoker {
 		protected override ActionResult CreateActionResult (ControllerContext controllerContext, ActionDescriptor actionDescriptor, object actionReturnValue) {
 			if (!(actionReturnValue is ActionResult)) {
 				controllerContext.Controller.ViewData.Model = actionReturnValue;

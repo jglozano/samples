@@ -1,1 +1,1 @@
-<%@ Application Inherits="inferredPoco.MvcApplication" %>
+<%@ Application Inherits="InferredPoco.MvcApplication" %>
