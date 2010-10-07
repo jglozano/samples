@@ -1,28 +1,24 @@
-namespace InferredPoco.Controllers
-{
+namespace InferredPoco.Controllers {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Web.Mvc;
     using Models;
 
     [HandleError]
-    public class PersonController : Controller
-    {
+    public class PersonController : Controller {
         private static readonly IList<Person> personList = new List<Person>();
 
-        public ActionResult Index()
-        {
+        #region Boring ActionResult-based code
+
+        public ActionResult Index() {
             return View(personList);
         }
 
-        public ActionResult CreateNew()
-        {
+        public ActionResult CreateNew() {
             return View(new Person());
         }
 
-        public ActionResult Delete(Person person)
-        {
+        public ActionResult Delete(Person person) {
             if (person != null) {
                 personList.Remove(person);
             }
@@ -31,10 +27,8 @@ namespace InferredPoco.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Person person)
-        {
-            if (person != null)
-            {
+        public ActionResult Create(Person person) {
+            if (person != null) {
                 person.Id = Guid.NewGuid();
                 personList.Add(person);
             }
@@ -42,8 +36,9 @@ namespace InferredPoco.Controllers
             return RedirectToAction("index");
         }
 
-        public IList<Person> GetList()
-        {
+        #endregion
+
+        public IList<Person> GetList() {
             return personList;
         }
     }
