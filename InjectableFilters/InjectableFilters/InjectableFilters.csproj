@@ -69,6 +69,7 @@
     <Compile Include="Models\MessageAttribute.cs" />
     <Compile Include="Models\MessageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProviderExt.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
